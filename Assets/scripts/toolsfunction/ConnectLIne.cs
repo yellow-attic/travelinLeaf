@@ -11,6 +11,8 @@ public class ConnectLIne : MonoBehaviour
 
     [SerializeField] private bool isflip;
 
+    [NonReorderable] public float currentangle;
+
 
     void Start()
     {
@@ -33,6 +35,7 @@ public class ConnectLIne : MonoBehaviour
     {
         // 用正弦函数产生平滑往返 [-1, 1]
         float angle = Mathf.Sin(Time.time * speed + randomOffset) * maxAngle;
+        currentangle = angle;
 
         // 应用到本地旋转（只在 Z 轴上旋转）
         transform.localRotation = Quaternion.Euler(0, 0, angle);

@@ -1,34 +1,64 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float rotationSpeed = 100f;
-    public float moveSpeed = 5f;
+    public float rotationSpeed = 100f;    // A/D 左右旋转速度
+    public float forwardSpeed = 5f;       // 空格前进速度
+    public float tiltAngle = 35f;         // W/S 最大倾斜角度
+    public float tiltSmooth = 5f;         // 倾斜的 Lerp 平滑系数
 
     [Header("Audio Settings")]
     [SerializeField] private AudioSource raumshipsound;
-    private bool isMoving = false;
 
+    private bool isMoving = false;
+    private float targetTiltX = 0f;       // 想要到达的 X 轴旋转角
 
     void Update()
     {
-        // --- 用 WASD 控制旋转 ---
-        float horizontal = Input.GetAxis("Horizontal"); // A, D 键 默认是 -1~1
-        float vertical = Input.GetAxis("Vertical");     // W, S 键 默认是 -1~1
+        float horizontal = Input.GetAxis("Horizontal");  // A / D
+        float vertical = Input.GetAxis("Vertical");    // W / S (-1~1)
 
-        // 绕 Y 轴旋转（左右转向）
+        // --- 左右旋转（Yaw） ---
         transform.Rotate(Vector3.up, horizontal * rotationSpeed * Time.deltaTime);
 
-        // 绕 X 轴旋转（上下抬头）
-        transform.Rotate(Vector3.right, -vertical * rotationSpeed * Time.deltaTime, Space.Self);
+        bool isPressingMoveKey = false;
+
+        // --- W/S 控制 X 轴倾斜旋转 ---
+        if (vertical > 0.1f)        // W
+        {
+            targetTiltX = -tiltAngle;
+            isPressingMoveKey = true;
+        }
+        else if (vertical < -0.1f)  // S
+        {
+            targetTiltX = tiltAngle;
+            isPressingMoveKey = true;
+        }
+        else
+        {
+            targetTiltX = 0f;       // 松开回正
+        }
+
+        // 平滑旋转到目标角度
+        float currentX = transform.localEulerAngles.x;
+
+        // 处理 360° → -180~180°
+        if (currentX > 180f) currentX -= 360f;
+
+        float newX = Mathf.Lerp(currentX, targetTiltX, Time.deltaTime * tiltSmooth);
+
+        transform.localRotation = Quaternion.Euler(newX, transform.localEulerAngles.y, 0f);
 
         // --- 按 Space 键向前移动 ---
         if (Input.GetKey(KeyCode.Space))
         {
-            transform.Translate(Vector3.forward * moveSpeed * Time.deltaTime);
+            transform.Translate(Vector3.forward * forwardSpeed * Time.deltaTime, Space.Self);
+            isPressingMoveKey = true;
+        }
 
+        // --- 统一声音逻辑 ---
+        if (isPressingMoveKey)
+        {
             if (!isMoving)
             {
                 if (raumshipsound != null)
@@ -46,5 +76,4 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    
 }

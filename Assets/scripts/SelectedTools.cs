@@ -24,17 +24,6 @@ public class SelectTools : MonoBehaviour
         }
     }
 
-    //void Update()
-    //{
-    //    for (int i = 0; i < buttons.Count; i++)
-    //    {
-    //        if (Input.GetKeyDown(KeyCode.Alpha1 + i))
-    //        {
-    //            OnButtonClicked(buttons[i]);
-    //        }
-    //    }
-    //}
-
     void OnButtonClicked(Button clickedBtn)
     {
         if (currentSelected == clickedBtn)
@@ -55,6 +44,28 @@ public class SelectTools : MonoBehaviour
         StartCoroutine(ScaleSmooth(clickedBtn.transform, selectedScale));
         currentSelected = clickedBtn;
     }
+
+    public void SelectedButton(Button currentButton)
+    {
+        if (currentSelected == currentButton)
+        {
+            StartCoroutine(ScaleSmooth(currentButton.transform, normalScale));
+            currentSelected = null;
+            return;
+        }
+
+        foreach (Button btn in buttons)
+        {
+            if (btn != currentButton)
+            {
+                StartCoroutine(ScaleSmooth(btn.transform, normalScale));
+            }
+        }
+
+        StartCoroutine(ScaleSmooth(currentButton.transform, selectedScale));
+        currentSelected = currentButton;
+    }
+
 
     IEnumerator ScaleSmooth(Transform target, float scale)
     {
