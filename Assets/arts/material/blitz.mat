@@ -13,10 +13,11 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ALPHAPREMULTIPLY_ON
+  - _EMISSION
   - _GLOSSYREFLECTIONS_OFF
   - _SPECULARHIGHLIGHTS_OFF
   m_InvalidKeywords: []
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: 3000
@@ -44,11 +45,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
-        m_Texture: {fileID: 2800000, guid: 72ff50b2391d742bdb62490b8199237e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 5180e381ea3f5354795a4f7acf6838fa, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: ce143e3b072664de7a222b60373be586, type: 3}
+        m_Texture: {fileID: 2800000, guid: 72ff50b2391d742bdb62490b8199237e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -82,6 +83,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.81846154, g: 1, b: 0.6179246, a: 1}
-    - _EmissionColor: {r: 0.3301887, g: 0.20714667, b: 0.20714667, a: 1}
+    - _Color: {r: 0.7561758, g: 1, b: 0.48584908, a: 1}
+    - _EmissionColor: {r: 0.06271548, g: 0.041740835, b: 0.13207549, a: 1}
   m_BuildTextureStacks: []

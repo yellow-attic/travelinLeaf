@@ -16,7 +16,7 @@ public class BatteryManager : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");   // W / S
 
         // 按住 Space 进行消耗
-        if (Input.GetKey(KeyCode.Space) || Mathf.Abs(vertical) > 0.01f)
+        if (Input.GetKey(KeyCode.Space) /*|| Mathf.Abs(vertical) > 0.01f*/)
         {
             batterySlider.value -= drainSpeed * Time.deltaTime;
         }

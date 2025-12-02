@@ -27,12 +27,10 @@ public class PlayerMovement : MonoBehaviour
         if (vertical > 0.1f)        // W
         {
             targetTiltX = -tiltAngle;
-            isPressingMoveKey = true;
         }
         else if (vertical < -0.1f)  // S
         {
             targetTiltX = tiltAngle;
-            isPressingMoveKey = true;
         }
         else
         {
@@ -52,7 +50,9 @@ public class PlayerMovement : MonoBehaviour
         // --- 按 Space 键向前移动 ---
         if (Input.GetKey(KeyCode.Space))
         {
-            transform.Translate(Vector3.forward * forwardSpeed * Time.deltaTime, Space.Self);
+            Vector3 direction = Input.GetKey(KeyCode.LeftShift) ? Vector3.back : Vector3.forward;
+
+            transform.Translate(direction * forwardSpeed * Time.deltaTime, Space.Self);
             isPressingMoveKey = true;
         }
 

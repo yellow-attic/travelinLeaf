@@ -8,6 +8,13 @@ public class ToolConnect : MonoBehaviour
     [SerializeField] private ToolStaub toolstaub;
     [SerializeField] private Color hovercolor;
 
+    private CameraFollow camerafollow;
+
+
+    private void Start()
+    {
+        camerafollow = FindAnyObjectByType<CameraFollow>();
+    }
 
     void Update()
     {
@@ -37,10 +44,15 @@ public class ToolConnect : MonoBehaviour
 
         AudioSource armsound = arm.GetComponent<AudioSource>();
         armsound.Play();
+
+        camerafollow.ToggleFocusMode();
     }
 
     public void ArmIn()
     {
         arm.SetActive(false);
+
+        camerafollow.ExitFocusMode();
     }
+
 }
