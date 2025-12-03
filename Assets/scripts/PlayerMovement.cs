@@ -2,10 +2,13 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float rotationSpeed = 100f;    // A/D 左右旋转速度
-    public float forwardSpeed = 5f;       // 空格前进速度
-    public float tiltAngle = 35f;         // W/S 最大倾斜角度
-    public float tiltSmooth = 5f;         // 倾斜的 Lerp 平滑系数
+    [SerializeField] private float rotationSpeed = 100f;    // A/D 左右旋转速度
+    [SerializeField] private float forwardSpeed = 5f;       // 空格前进速度
+    [SerializeField] private float tiltAngle = 35f;         // W/S 最大倾斜角度
+    [SerializeField] private float tiltSmooth = 5f;         // 倾斜的 Lerp 平滑系数
+
+    [SerializeField] private GameObject backwardicon;
+
 
     [Header("Audio Settings")]
     [SerializeField] private AudioSource raumshipsound;
@@ -50,7 +53,28 @@ public class PlayerMovement : MonoBehaviour
         // --- 按 Space 键向前移动 ---
         if (Input.GetKey(KeyCode.Space))
         {
-            Vector3 direction = Input.GetKey(KeyCode.LeftShift) ? Vector3.back : Vector3.forward;
+            Vector3 direction;
+
+            if(Input.GetKey(KeyCode.LeftShift))
+            {
+                direction = Vector3.back;
+                if(backwardicon != null)
+                {
+                    backwardicon.SetActive(true);
+                }
+            }
+            else
+            {
+                direction = Vector3.forward;
+            }
+
+            if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                if (backwardicon != null)
+                {
+                    backwardicon.SetActive(false);
+                }
+            }
 
             transform.Translate(direction * forwardSpeed * Time.deltaTime, Space.Self);
             isPressingMoveKey = true;

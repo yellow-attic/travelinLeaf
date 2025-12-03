@@ -5,10 +5,6 @@ public class ToolSwitcher : MonoBehaviour
 {
     [SerializeField] private GameObject Toolpanel;
 
-    void Start()
-    {
-        
-    }
 
     void Update()
     {

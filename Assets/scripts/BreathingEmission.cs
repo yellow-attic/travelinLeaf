@@ -2,19 +2,19 @@ using UnityEngine;
 
 public class BreathingEmission : MonoBehaviour
 {
-    public Renderer targetRenderer;
-    public Color emissionColor = Color.white;
-    public float speed = 2f;
-    public float minIntensity = 0.2f;
-    public float maxIntensity = 2f;
+    private Renderer targetRenderer;
+
+    [SerializeField] private Color emissionColor = Color.white;
+    [SerializeField] private float speed = 2f;
+    [SerializeField] private float minIntensity = 0.2f;
+    [SerializeField] private float maxIntensity = 2f;
 
     private Material mat;
     private float emissionStrength;
 
     void Start()
     {
-        if (targetRenderer == null)
-            targetRenderer = GetComponent<Renderer>();
+        targetRenderer = GetComponent<Renderer>();
 
         mat = targetRenderer.material;
         mat.EnableKeyword("_EMISSION");

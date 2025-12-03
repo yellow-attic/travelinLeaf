@@ -7,14 +7,18 @@ public class HandConnectManager : MonoBehaviour
 
     [SerializeField] private GameObject connectpanel;
 
+    private bool connectallowed = false;
 
-    private bool printed = false;
 
     void Update()
     {
         if (leftcheck.handConnect && rightcheck.handConnect)
         {
-            connectpanel.SetActive(true);
+            if(!connectallowed)
+            {
+                connectpanel.SetActive(true);
+                connectallowed = true;
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ public class ConnetTime : MonoBehaviour
     [NonReorderable] public bool isintime;
 
 
-    private void Start()
+    private void OnEnable()
     {
         targetImage = GetComponent<Image>();
         StartCoroutine(FillOverTime());
