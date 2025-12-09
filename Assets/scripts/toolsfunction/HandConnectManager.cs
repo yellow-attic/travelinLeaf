@@ -21,4 +21,10 @@ public class HandConnectManager : MonoBehaviour
             }
         }
     }
+
+
+    public void ConnectpanelReset()
+    {
+        connectallowed = false;
+    }
 }

@@ -9,11 +9,12 @@ public class ToolConnect : MonoBehaviour
     [SerializeField] private Color hovercolor;
 
     private CameraFollow camerafollow;
-
+    private PlayerMovement player;
 
     private void Start()
     {
         camerafollow = FindAnyObjectByType<CameraFollow>();
+        player = FindAnyObjectByType<PlayerMovement>();
     }
 
     void Update()
@@ -46,6 +47,7 @@ public class ToolConnect : MonoBehaviour
         armsound.Play();
 
         camerafollow.ToggleFocusMode();
+        player.MoveChange();
     }
 
     public void ArmIn()
@@ -53,6 +55,14 @@ public class ToolConnect : MonoBehaviour
         arm.SetActive(false);
 
         camerafollow.ExitFocusMode();
+        player.MoveContinue();
     }
 
+    public void ConnectFailed()
+    {
+        SelectTools selecttools = GetComponentInParent<SelectTools>();
+        selecttools.SelectedButton(GetComponent<Button>());
+
+        ArmIn();
+    }
 }

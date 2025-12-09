@@ -12,11 +12,21 @@ public class DragInsideCircleLeft : MonoBehaviour
     private Camera cam;
     private bool isDragging = false;
 
+    [SerializeField] private Vector3 startpos;
+
 
     void Start()
     {
         cam = Camera.main;
     }
+
+    private void OnEnable()
+    {
+        isDragging = false;
+        transform.localPosition = startpos;
+        trigglecheck.TriggerReset();
+    }
+
 
     void Update()
     {

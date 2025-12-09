@@ -30,5 +30,12 @@ public class TrggleCheck : MonoBehaviour
     {
         isColliding = false;
     }
+
+    public void TriggerReset()
+    {
+        isColliding = false;
+
+        handConnect = false;
+    }
 }
 

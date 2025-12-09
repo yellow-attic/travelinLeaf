@@ -10,6 +10,9 @@ public class ConnetTime : MonoBehaviour
 
     [NonReorderable] public bool isintime;
 
+    [SerializeField] private ToolConnect toolconnect;
+    [SerializeField] private HandConnectManager handconnect;
+
 
     private void OnEnable()
     {
@@ -45,5 +48,9 @@ public class ConnetTime : MonoBehaviour
     private void closePanel()
     {
         gameObject.SetActive(false);
+
+        //player backward
+        toolconnect.ConnectFailed();
+        handconnect.ConnectpanelReset();
     }
 }

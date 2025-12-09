@@ -16,8 +16,23 @@ public class PlayerMovement : MonoBehaviour
     private bool isMoving = false;
     private float targetTiltX = 0f;       // 想要到达的 X 轴旋转角
 
+    private bool moveallowed = true;
+
+
+    public void MoveChange()
+    {
+        moveallowed = !moveallowed;
+    }
+
+    public void MoveContinue()
+    {
+        moveallowed = true;
+    }
+
     void Update()
     {
+        if (!moveallowed) return;
+
         float horizontal = Input.GetAxis("Horizontal");  // A / D
         float vertical = Input.GetAxis("Vertical");    // W / S (-1~1)
 

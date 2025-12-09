@@ -11,6 +11,8 @@ public class ConnectManager : MonoBehaviour
 
     [SerializeField] private LineMergeAnimation linemerge;
 
+    [SerializeField] private GameObject[] brokens;
+
 
 
     void Start()
@@ -20,7 +22,7 @@ public class ConnectManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKey(KeyCode.Return))
+        if(Input.GetKey(KeyCode.C))
         {
             if (!connecttime.isintime) return;
 
@@ -31,7 +33,14 @@ public class ConnectManager : MonoBehaviour
             {
                 Debug.Log("Line Connect!");
 
-                //linemerge.StartMerge();
+                linemerge.StartMerge();
+
+                foreach(GameObject obj in brokens)
+                {
+                    obj.SetActive(false);
+                }
+
+                //engry ++
             }
         }
     }
