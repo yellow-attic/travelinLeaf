@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 
 public class TrggleCheck : MonoBehaviour
 {
@@ -22,13 +21,19 @@ public class TrggleCheck : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        isColliding = true;
+        if (other.CompareTag("Broken"))
+        {
+            isColliding = true;
+        }
     }
 
 
     private void OnTriggerExit(Collider other)
     {
-        isColliding = false;
+        if (other.CompareTag("Broken"))
+        {
+            isColliding = false;
+        }
     }
 
     public void TriggerReset()
