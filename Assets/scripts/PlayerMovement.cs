@@ -102,13 +102,13 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            if(batterymanager.CheckBattery())
+            if(batterymanager.IsLowBattery())
             {
-                transform.Translate(direction * forwardSpeed * Time.deltaTime, Space.Self);
+                transform.Translate(direction * miniSpeed * Time.deltaTime, Space.Self);
             }
             else
             {
-                transform.Translate(direction * miniSpeed * Time.deltaTime, Space.Self);
+                transform.Translate(direction * forwardSpeed * Time.deltaTime, Space.Self);
             }
 
             isPressingMoveKey = true;
@@ -140,8 +140,6 @@ public class PlayerMovement : MonoBehaviour
 
     public IEnumerator SpeedBoost(float boostDistance, float boostDuration)
     {
-        batterymanager.GetLineEnergy();
-
         float elapsed = 0f;
 
         // 记录起点和终点（朝 forward 冲）

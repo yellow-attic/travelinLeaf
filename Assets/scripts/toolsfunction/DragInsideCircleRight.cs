@@ -9,6 +9,9 @@ public class DragInsideCircleLeft : MonoBehaviour
     [Header("Connection State")]
     [SerializeField] private TrggleCheck trigglecheck;
 
+    [Header("Animation")]
+    [SerializeField] private Animator handanim;
+
     private Camera cam;
     private bool isDragging = false;
 
@@ -37,7 +40,14 @@ public class DragInsideCircleLeft : MonoBehaviour
         if (Input.GetMouseButtonUp(1))
         {
             isDragging = false;
-            trigglecheck.CheckConnect();
+            if (trigglecheck.CheckConnect())
+            {
+                handanim.SetTrigger("IsCatched");
+            }
+            else
+            {
+                handanim.SetTrigger("IsGrapping");
+            }
         }
 
         if (isDragging)

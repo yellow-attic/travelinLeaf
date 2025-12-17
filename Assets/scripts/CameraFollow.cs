@@ -19,6 +19,13 @@ public class CameraFollow : MonoBehaviour
     private bool isFocusing = false;
 
 
+    [Header("Zoom Settings")]
+    public float zoomSpeed = 10f;
+    public float minDistance = 21f;
+    public float maxDistance = 34f;
+
+
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
@@ -51,6 +58,14 @@ public class CameraFollow : MonoBehaviour
 
             // 让相机朝向目标
             transform.LookAt(target.position + Vector3.up * height * 0.5f);
+
+            // --- 鼠标滚轮控制相机距离 ---
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            if (Mathf.Abs(scroll) > 0.01f)
+            {
+                distance -= scroll * zoomSpeed;
+                distance = Mathf.Clamp(distance, minDistance, maxDistance);
+            }
         }
         else
         {

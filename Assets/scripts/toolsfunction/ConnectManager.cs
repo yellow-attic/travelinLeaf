@@ -8,11 +8,7 @@ public class ConnectManager : MonoBehaviour
     [SerializeField] private float connectangle;
 
     private ConnetTime connecttime;
-
-    [SerializeField] private LineMergeAnimation linemerge;
-
-    [SerializeField] private GameObject[] brokens;
-
+    private BrokenStation currentstation;
 
 
     void Start()
@@ -33,15 +29,13 @@ public class ConnectManager : MonoBehaviour
             {
                 Debug.Log("Line Connect!");
 
-                linemerge.StartMerge();
-
-                foreach(GameObject obj in brokens)
-                {
-                    obj.SetActive(false);
-                }
-
-                //engry ++
+                currentstation.BrokenRepair();
             }
         }
+    }
+
+    public void GetBrokenStation(BrokenStation station)
+    {
+        currentstation = station;
     }
 }

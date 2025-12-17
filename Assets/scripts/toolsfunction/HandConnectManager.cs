@@ -7,6 +7,7 @@ public class HandConnectManager : MonoBehaviour
 
     [SerializeField] private GameObject connectpanel;
 
+    private BrokenStation currentstation;
     private bool connectallowed = false;
 
 
@@ -17,6 +18,7 @@ public class HandConnectManager : MonoBehaviour
             if(!connectallowed)
             {
                 connectpanel.SetActive(true);
+                connectpanel.GetComponent<ConnectManager>().GetBrokenStation(leftcheck.BrokStat);
                 connectallowed = true;
             }
         }
