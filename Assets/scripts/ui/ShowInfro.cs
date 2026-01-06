@@ -32,7 +32,7 @@ public class ShowInfro : DistanceCheck
         //Debug.Log("B - Exit Radius");
 
         Infropannel.SetActive(false);
-        targetpannel.SetActive(true);
+        targetpannel.SetActive(false);
 
         production.SetActive(false);
     }

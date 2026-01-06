@@ -14,6 +14,9 @@ public class BatteryManager : MonoBehaviour
 
     private bool batteryusing = false;
 
+    [Header("Buss")]
+    [SerializeField] private GameObject Bussicon;
+
 
     void Update()
     {
@@ -24,6 +27,8 @@ public class BatteryManager : MonoBehaviour
             batterySlider.value -= drainSpeed * Time.deltaTime;
             batterySlider.value = Mathf.Clamp01(batterySlider.value);
         }
+
+        checkBatteryBuss();
     }
 
     public bool IsLowBattery()
@@ -80,5 +85,13 @@ public class BatteryManager : MonoBehaviour
         batterySlider.value = Mathf.Clamp01(batterySlider.value);
 
         Debug.Log("Get Energy" + connectengry);
+    }
+
+    private void checkBatteryBuss()
+    {
+        if(batterySlider.value >= 0.9f)
+        {
+            Bussicon.SetActive(true);
+        }
     }
 }

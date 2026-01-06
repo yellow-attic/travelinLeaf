@@ -22,8 +22,9 @@ public class ShowHinweis : DistanceCheck
     protected override void OnEnterRadius()
     {
         hinweismanager.AssignTexts(hinweiscode.HinweisTxt);
+        hinweiscode.UnlockAchivement();
 
-        if(!isenergyget)
+        if (!isenergyget)
         {
             batterymanager.GetHinweisEnergy();
             isenergyget = true;
@@ -41,4 +42,5 @@ public class ShowHinweis : DistanceCheck
     {
         //Debug.Log("Inside...");
     }
+
 }

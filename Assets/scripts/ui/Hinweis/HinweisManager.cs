@@ -35,6 +35,7 @@ public class HinweisManager : MonoBehaviour
     {
         textTarget.text = null;
 
+        Infropannel.SetActive(false);
         hinweispannel.SetActive(false);
     }
 }

@@ -46,5 +46,5 @@ Material:
     - _InvFade: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _TintColor: {r: 0.22662896, g: 0.34901962, b: 0.18431373, a: 0.5}
+    - _TintColor: {r: 0.20950516, g: 0.29859382, b: 0.41509432, a: 0.5}
   m_BuildTextureStacks: []

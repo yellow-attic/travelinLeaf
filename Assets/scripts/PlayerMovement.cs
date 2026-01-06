@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float tiltSmooth = 5f;
 
     [SerializeField] private GameObject backwardicon;
+    [SerializeField] private GameObject smoke;
 
     [Header("Audio Settings")]
     [SerializeField] private AudioSource raumshipsound;
@@ -122,6 +123,8 @@ public class PlayerMovement : MonoBehaviour
                     raumshipsound.Play();
 
                 batterymanager.UseBattery();
+                //smoke.SetActive(true);
+
                 isMoving = true;
             }
         }
@@ -133,6 +136,8 @@ public class PlayerMovement : MonoBehaviour
                     raumshipsound.Stop();
 
                 batterymanager.StopBattery();
+                //smoke.SetActive(false);
+
                 isMoving = false;
             }
         }

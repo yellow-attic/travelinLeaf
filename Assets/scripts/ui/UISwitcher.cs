@@ -33,6 +33,14 @@ public class ToolSwitcher : MonoBehaviour
     {
         Infropanel.SetActive(!Infropanel.activeSelf);
 
-        production.SetActive(!production.activeSelf);
+        if(Infropanel.activeSelf)
+        {
+            production.SetActive(true);
+        }
+        else
+        {
+            production.SetActive(false);
+        }
+
     }
 }
