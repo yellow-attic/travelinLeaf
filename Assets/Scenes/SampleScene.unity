@@ -93658,7 +93658,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &705507994
 Light:
   m_ObjectHideFlags: 0
@@ -121048,7 +121048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acff7ab3850ec48b68a0d8b90ef4501b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Infropannel: {fileID: 0}
+  Infropannel: {fileID: 2026067127}
   hinweispannel: {fileID: 944371316}
   textTarget: {fileID: 1190305754}
 --- !u!222 &944371320
@@ -214485,7 +214485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   batterySlider: {fileID: 1690070627}
-  drainSpeed: 0.02
+  drainSpeed: 0.01
   lineengry: 0.05
   hinweisengry: 0.1
   connectengry: 0.2
@@ -218767,6 +218767,7 @@ GameObject:
   - component: {fileID: 1794121674}
   - component: {fileID: 1794121673}
   - component: {fileID: 1794121672}
+  - component: {fileID: 1794121675}
   m_Layer: 5
   m_Name: But_Blitz
   m_TagString: Untagged
@@ -218836,7 +218837,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1794121673}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1794121675}
+        m_TargetAssemblyTypeName: ToolBlitz, Assembly-CSharp
+        m_MethodName: BlitzOut
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1794121673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218875,6 +218888,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1794121670}
   m_CullTransparentMesh: 1
+--- !u!114 &1794121675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1794121670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09a4ed378983442eca7c1928619b09ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blitz: {fileID: 1443276521}
+  toolconnect: {fileID: 1832430443}
+  toolstaub: {fileID: 1924212016}
+  hovercolor: {r: 0.94509804, g: 1, b: 0.61960787, a: 0}
 --- !u!114 &1795159309 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2889067521935223853, guid: fb06b153feecd47d0b3026dd79903068, type: 3}
@@ -220349,6 +220378,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arm: {fileID: 829188676095497500}
   toolstaub: {fileID: 1924212016}
+  toolblitz: {fileID: 1794121675}
   hovercolor: {r: 0.94509804, g: 1, b: 0.61960787, a: 1}
 --- !u!1 &1834385041
 GameObject:
@@ -234212,7 +234242,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leg: {fileID: 2079664493925481392}
   toolconnect: {fileID: 1832430443}
-  hovercolor: {r: 0, g: 0, b: 0, a: 0}
+  toolblitz: {fileID: 1794121675}
+  hovercolor: {r: 0.94509804, g: 1, b: 0.61960787, a: 0}
 --- !u!1 &1927365352
 GameObject:
   m_ObjectHideFlags: 0

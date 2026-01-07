@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ToolStaub : MonoBehaviour
+public class ToolBlitz : MonoBehaviour
 {
-    [SerializeField] private GameObject leg;
+    [SerializeField] private GameObject blitz;
 
     [SerializeField] private ToolConnect toolconnect;
-    [SerializeField] private ToolBlitz toolblitz;
+    [SerializeField] private ToolStaub toolstaub;
 
     [SerializeField] private Color hovercolor;
 
@@ -27,23 +27,23 @@ public class ToolStaub : MonoBehaviour
             SelectTools selecttools = GetComponentInParent<SelectTools>();
             selecttools.SelectedButton(GetComponent<Button>());
 
-            LegOut();
+            BlitzOut();
         }
     }
 
-    public void LegOut()
+    public void BlitzOut()
     {
         toolconnect.ArmIn();
-        toolblitz.BlitzIn();
+        toolstaub.LegIn();
 
-        leg.SetActive(!leg.activeSelf);
+        blitz.SetActive(!blitz.activeSelf);
 
-        AudioSource armsound = leg.GetComponent<AudioSource>();
+        AudioSource armsound = blitz.GetComponent<AudioSource>();
         armsound.Play();
     }
 
-    public void LegIn()
+    public void BlitzIn()
     {
-        leg.SetActive(false);
+        blitz.SetActive(false);
     }
 }

@@ -6,6 +6,8 @@ public class ToolConnect : MonoBehaviour
     [SerializeField] private GameObject arm;
 
     [SerializeField] private ToolStaub toolstaub;
+    [SerializeField] private ToolBlitz toolblitz;
+
     [SerializeField] private Color hovercolor;
 
     private CameraFollow camerafollow;
@@ -40,6 +42,7 @@ public class ToolConnect : MonoBehaviour
     public void ArmOut()
     {
         toolstaub.LegIn();
+        toolblitz.BlitzIn();
 
         arm.SetActive(!arm.activeSelf);
 
