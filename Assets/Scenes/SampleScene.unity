@@ -101995,7 +101995,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 57
-  speed: 3
+  speed: 4
   isflip: 1
   currentangle: 0
 --- !u!222 &781322588
@@ -109755,7 +109755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 57
-  speed: 1
+  speed: 4
   isflip: 0
   currentangle: 0
 --- !u!222 &823171972
