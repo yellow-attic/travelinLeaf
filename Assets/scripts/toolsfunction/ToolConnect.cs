@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR;
 
 public class ToolConnect : MonoBehaviour
 {
@@ -19,8 +20,18 @@ public class ToolConnect : MonoBehaviour
         player = FindAnyObjectByType<PlayerMovement>();
     }
 
+    private bool primaryButtonDown = false;
+
     void Update()
     {
+
+        bool primaryDown = VrOrigin.GetLeftPrimaryButton() || VrOrigin.GetRightPrimaryButton();
+        if (primaryDown && !primaryButtonDown) {
+            ArmOut();
+        }
+        primaryButtonDown = primaryDown;
+
+
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             Image img = GetComponent<Image>();

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.XR;
 
 public class ConnectManager : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class ConnectManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKey(KeyCode.C))
+        if (Input.GetKey(KeyCode.C) || VrOrigin.GetLeftSecondaryButton() || VrOrigin.GetRightSecondaryButton())
         {
             if (!connecttime.isintime) return;
 

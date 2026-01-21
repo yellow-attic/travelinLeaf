@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.XR;
 
 
 public class PlayerMovement : MonoBehaviour
@@ -44,13 +43,15 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        InputDevice leftHand = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
-        bool leftTrigger = (leftHand.TryGetFeatureValue(CommonUsages.triggerButton, out bool pressed) && pressed);
+
 
         if (!moveallowed) return;
 
         float horizontal = Input.GetAxis("Horizontal");  // A / D
         float vertical = Input.GetAxis("Vertical");    // W / S
+
+        horizontal += VrOrigin.GetLeftAxis().x + VrOrigin.GetRightAxis().x;
+        vertical += VrOrigin.GetLeftAxis().y + VrOrigin.GetRightAxis().y;
 
         // --- 左右旋转（Yaw） ---
         transform.Rotate(Vector3.up, horizontal * rotationSpeed * Time.deltaTime);
@@ -82,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
         transform.localRotation = Quaternion.Euler(newX, transform.localEulerAngles.y, 0f);
 
         // --- 按 Space 键向前移动 ---
-        if (Input.GetKey(KeyCode.Space) || leftTrigger)
+        if (Input.GetKey(KeyCode.Space) || VrOrigin.GetLeftTrigger() || VrOrigin.GetRightTrigger())
         {
             Vector3 direction;
 

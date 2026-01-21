@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class DragInsideCircleRight : MonoBehaviour
 {
@@ -32,11 +34,17 @@ public class DragInsideCircleRight : MonoBehaviour
 
     void Update()
     {
+        InputDevice leftHand = InputDevices.GetDeviceAtXRNode(XRNode.LeftHand);
+        bool gripDown = (leftHand.TryGetFeatureValue(CommonUsages.gripButton, out bool pressed) && pressed);
+        bool gripReleased = !gripDown && isDragging;
+
         if (trigglecheck.handConnect)
             return;
 
-        if (Input.GetMouseButtonDown(0)) isDragging = true;
-        if (Input.GetMouseButtonUp(0))
+        //if (Input.GetMouseButtonDown(0)) isDragging = true;
+        if (gripDown) isDragging = true;
+        //if (Input.GetMouseButtonUp(0))
+        if (gripReleased)
         {
             isDragging = false;
             if(trigglecheck.CheckConnect())
@@ -55,18 +63,19 @@ public class DragInsideCircleRight : MonoBehaviour
         }
     }
 
-    void DragMove()
-    {
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = Vector3.Distance(cam.transform.position, center.position);
-        Vector3 targetPos = cam.ScreenToWorldPoint(mousePos);
+    void DragMove() {
+        //Vector3 mousePos = Input.mousePosition;
+        //mousePos.z = Vector3.Distance(cam.transform.position, center.position);
+        //Vector3 targetPos = cam.ScreenToWorldPoint(mousePos);
 
-        Vector3 offset = targetPos - center.position;
+        //Vector3 offset = targetPos - center.position;
 
-        if (offset.magnitude > radius)
-            offset = offset.normalized * radius;
+        //if (offset.magnitude > radius)
+        //    offset = offset.normalized * radius;
 
-        transform.position = center.position + offset;
+        //transform.position = center.position + offset;
+
+        transform.localPosition += VrOrigin.GetLeftHandDelta() * 4.0f;
     }
 
     private void OnDrawGizmosSelected()
