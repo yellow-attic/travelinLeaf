@@ -39,7 +39,10 @@ public class ToolStaub : MonoBehaviour
         leg.SetActive(!leg.activeSelf);
 
         AudioSource armsound = leg.GetComponent<AudioSource>();
-        armsound.Play();
+        if (armsound != null)
+        {
+            armsound.Play();
+        }
     }
 
     public void LegIn()

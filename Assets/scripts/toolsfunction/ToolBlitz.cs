@@ -13,13 +13,13 @@ public class ToolBlitz : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             Image img = GetComponent<Image>();
             img.color = hovercolor;
         }
 
-        if (Input.GetKeyUp(KeyCode.Alpha2))
+        if (Input.GetKeyUp(KeyCode.Alpha3))
         {
             Image img = GetComponent<Image>();
             img.color = Color.white;
@@ -39,7 +39,10 @@ public class ToolBlitz : MonoBehaviour
         blitz.SetActive(!blitz.activeSelf);
 
         AudioSource armsound = blitz.GetComponent<AudioSource>();
-        armsound.Play();
+        if(armsound != null)
+        {
+            armsound.Play();
+        }
     }
 
     public void BlitzIn()
