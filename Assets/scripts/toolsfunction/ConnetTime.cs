@@ -53,4 +53,11 @@ public class ConnetTime : MonoBehaviour
         toolconnect.ConnectFailed();
         handconnect.ConnectpanelReset();
     }
+
+    public void ConnectPanelClose()
+    {
+        gameObject.SetActive(false);
+        //toolconnect.ConnectFailed();
+        handconnect.ConnectpanelReset();
+    }
 }

@@ -30,6 +30,7 @@ public class ConnectManager : MonoBehaviour
                 Debug.Log("Line Connect!");
 
                 currentstation.BrokenRepair();
+                //connecttime.ConnectPanelClose();
             }
         }
     }
