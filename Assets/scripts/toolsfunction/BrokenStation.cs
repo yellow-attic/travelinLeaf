@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BrokenStation : MonoBehaviour
-{
+public class BrokenStation : MonoBehaviour {
+
     [Header("Broken Parts")]
     [SerializeField] private GameObject[] brokens;
 
@@ -12,15 +12,13 @@ public class BrokenStation : MonoBehaviour
     private bool isconnected;
 
 
-    private void Start()
-    {
+    private void Start() {
         batterymanager = FindAnyObjectByType<BatteryManager>();
         linemerge = GetComponent<LineMergeAnimation>();
         isconnected = false;
     }
 
-    public void BrokenRepair()
-    {
+    public void BrokenRepair() {
         if (isconnected) return;
 
         if (linemerge != null)

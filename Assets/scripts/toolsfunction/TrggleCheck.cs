@@ -6,28 +6,32 @@ public class TrggleCheck : MonoBehaviour
     [Header("Connection State")]
     [NonReorderable] public bool handConnect = false;
 
+    private Collider _brokenCollider;
     public BrokenStation BrokStat;
     private bool isColliding = false;
 
+    public struct ConnectInfo {
+        public bool isConnected;
+        public Transform lineEnd;
+    }
 
-    public bool CheckConnect()
-    {
-        if (isColliding)
-        {
+    public ConnectInfo CheckConnect() {
+        if (isColliding)  {
             handConnect = true;
 
             Debug.Log("hand connenct");
-
-            return true;
+            // TODO: get particle object which is end of the broken line
+            return new ConnectInfo { isConnected=true, lineEnd=_brokenCollider.transform.parent.GetChild(0) };
         }
 
-        return false;
+        return new ConnectInfo { isConnected = false, lineEnd = null };
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Broken"))
         {
+            _brokenCollider = other;
             BrokStat = other.transform.parent.GetComponentInParent<BrokenStation>();
             isColliding = true;
         }

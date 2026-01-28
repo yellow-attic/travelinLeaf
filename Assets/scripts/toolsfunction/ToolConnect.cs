@@ -15,6 +15,7 @@ public class ToolConnect : MonoBehaviour
 
     private void Start()
     {
+        arm.SetActive(false);
         camerafollow = FindAnyObjectByType<CameraFollow>();
         player = FindAnyObjectByType<PlayerMovement>();
     }

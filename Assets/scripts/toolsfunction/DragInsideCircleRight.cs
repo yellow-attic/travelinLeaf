@@ -40,7 +40,7 @@ public class DragInsideCircleLeft : MonoBehaviour
         if (Input.GetMouseButtonUp(1))
         {
             isDragging = false;
-            if (trigglecheck.CheckConnect())
+            if (trigglecheck.CheckConnect().isConnected)
             {
                 handanim.SetTrigger("IsCatched");
             }
