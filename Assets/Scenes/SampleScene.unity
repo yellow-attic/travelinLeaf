@@ -142920,7 +142920,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!20 &1066404302
 Camera:
   m_ObjectHideFlags: 0
@@ -142928,7 +142928,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1066404301}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 4
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
@@ -145637,7 +145637,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9033537768184193657, guid: 9d8dcf1f762bb164698de2829e413831, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1574721614331519072, guid: 9d8dcf1f762bb164698de2829e413831, type: 3}
@@ -233895,7 +233896,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 1066404302}
+  m_Camera: {fileID: 2110723973}
   m_PlaneDistance: 21.75
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -233916,7 +233917,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1919019267}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 9.41}
+  m_LocalPosition: {x: 0, y: 0, z: 6.29}
   m_LocalScale: {x: 0.004577731, y: 0.004577731, z: 0.004577731}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -233934,7 +233935,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -1.83, y: 0.92}
+  m_AnchoredPosition: {x: -0.04, y: 1.34}
   m_SizeDelta: {x: 2732, y: 2184.4885}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1919570856
@@ -279255,6 +279256,11 @@ MonoBehaviour:
 --- !u!4 &2110723972 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1574721614331519072, guid: 9d8dcf1f762bb164698de2829e413831, type: 3}
+  m_PrefabInstance: {fileID: 1108285704}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &2110723973 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 1478566834730743731, guid: 9d8dcf1f762bb164698de2829e413831, type: 3}
   m_PrefabInstance: {fileID: 1108285704}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2112042871

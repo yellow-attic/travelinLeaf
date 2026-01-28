@@ -19,7 +19,7 @@ public class ToolStaub : MonoBehaviour
             img.color = hovercolor;
         }
 
-        if (Input.GetKeyUp(KeyCode.Alpha2))
+        if (Input.GetKeyUp(KeyCode.Alpha2) || Raumkapsel.VR.Tools.GetToolPressed(Raumkapsel.VR.Tool.Staub))
         {
             Image img = GetComponent<Image>();
             img.color = Color.white;

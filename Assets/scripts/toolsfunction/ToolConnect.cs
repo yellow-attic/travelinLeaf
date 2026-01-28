@@ -20,16 +20,13 @@ public class ToolConnect : MonoBehaviour
         player = FindAnyObjectByType<PlayerMovement>();
     }
 
-    private bool primaryButtonDown = false;
-
-    void Update()
-    {
-
-        bool primaryDown = VrOrigin.GetLeftPrimaryButton() || VrOrigin.GetRightPrimaryButton();
-        if (primaryDown && !primaryButtonDown) {
-            ArmOut();
-        }
-        primaryButtonDown = primaryDown;
+    void Update() {
+        // switches to arms tool - check what to do for it actually
+        //bool primaryDown = VrOrigin.GetLeftPrimaryButton() || VrOrigin.GetRightPrimaryButton();
+        //if (primaryDown && !primaryButtonDown) {
+        //    ArmOut();
+        //}
+        //primaryButtonDown = primaryDown;
 
 
         if (Input.GetKeyDown(KeyCode.Alpha4))
@@ -38,7 +35,7 @@ public class ToolConnect : MonoBehaviour
             img.color = hovercolor;
         }
 
-        if (Input.GetKeyUp(KeyCode.Alpha4))
+        if (Input.GetKeyUp(KeyCode.Alpha4) || Raumkapsel.VR.Tools.GetToolPressed(Raumkapsel.VR.Tool.Arms))
         {
             Image img = GetComponent<Image>();
             img.color = Color.white;

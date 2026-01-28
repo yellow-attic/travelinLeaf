@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.XR;
 
 public class DragInsideCircleLeft : MonoBehaviour
 {
@@ -32,20 +31,12 @@ public class DragInsideCircleLeft : MonoBehaviour
     }
 
 
-    void Update()
-    {
-        InputDevice rightHand = InputDevices.GetDeviceAtXRNode(XRNode.RightHand);
-        bool gripDown = (rightHand.TryGetFeatureValue(CommonUsages.gripButton, out bool pressed) && pressed);
-        bool gripReleased = !gripDown && isDragging;
-
+    void Update() {
         if (trigglecheck.handConnect)
             return;
 
-        //if (Input.GetMouseButtonDown(1)) isDragging = true;
-        if (gripDown) isDragging = true;
-        //if (Input.GetMouseButtonUp(1))
-        if (gripReleased)
-            {
+        if (Input.GetMouseButtonDown(1) || Raumkapsel.VR.Input.GetRightGripPressed()) isDragging = true;
+        if (Input.GetMouseButtonUp(1) || Raumkapsel.VR.Input.GetRightGripReleased()) {
             isDragging = false;
             if (trigglecheck.CheckConnect())
             {
@@ -64,19 +55,23 @@ public class DragInsideCircleLeft : MonoBehaviour
     }
 
     void DragMove() {
-        //Vector3 mousePos = Input.mousePosition;
-        //mousePos.z = Vector3.Distance(cam.transform.position, center.position);
-        //Vector3 targetPos = cam.ScreenToWorldPoint(mousePos);
+        // VR control code
+        if (Raumkapsel.VR.Configuration.IsVrActive()) {
+            transform.localPosition += Raumkapsel.VR.Input.GetRightHandDelta() * 4.0f;
+            return;
+        }
 
-        //Vector3 targetPos = VrOrigin.GetLocalRightHandPosition() * 50.0f;
+        // regular PC control code
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = Vector3.Distance(cam.transform.position, center.position);
+        Vector3 targetPos = cam.ScreenToWorldPoint(mousePos);
 
-        //Vector3 offset = targetPos - center.position;
+        Vector3 offset = targetPos - center.position;
 
-        //if (offset.magnitude > radius)
-        //    offset = offset.normalized * radius;
+        if (offset.magnitude > radius)
+            offset = offset.normalized * radius;
 
-        //transform.position = center.position + offset;
-        transform.localPosition += VrOrigin.GetRightHandDelta() * 4.0f;
+        transform.position = center.position + offset;
     }
 
     private void OnDrawGizmosSelected()

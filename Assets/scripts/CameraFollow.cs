@@ -34,15 +34,19 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
-    void LateUpdate()
-    {
+    void LateUpdate() {
         if (target == null) return;
 
-        // --- Q/E 控制相机左右旋转（普通模式 + 聚焦模式通用）---
-        if (Input.GetKey(KeyCode.Q))
-            currentAngle -= rotateSpeed * Time.deltaTime;
-        if (Input.GetKey(KeyCode.E))
-            currentAngle += rotateSpeed * Time.deltaTime;
+        if (Raumkapsel.VR.Configuration.IsVrActive()) {
+            currentAngle += Raumkapsel.VR.Input.GetRightAxis().x * rotateSpeed * Time.deltaTime;
+        }
+        else {
+            // --- Q/E 控制相机左右旋转（普通模式 + 聚焦模式通用）---
+            if (Input.GetKey(KeyCode.Q))
+                currentAngle -= rotateSpeed * Time.deltaTime;
+            if (Input.GetKey(KeyCode.E))
+                currentAngle += rotateSpeed * Time.deltaTime;
+        }
 
         // 只绕 Y 轴旋转
         Quaternion rotation = Quaternion.Euler(0, currentAngle, 0);

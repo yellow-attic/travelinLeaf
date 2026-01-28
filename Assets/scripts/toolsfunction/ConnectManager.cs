@@ -19,7 +19,7 @@ public class ConnectManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.C) || VrOrigin.GetLeftSecondaryButton() || VrOrigin.GetRightSecondaryButton())
+        if (Input.GetKey(KeyCode.C) || Raumkapsel.VR.Input.GetRightSecondaryButton())
         {
             if (!connecttime.isintime) return;
 

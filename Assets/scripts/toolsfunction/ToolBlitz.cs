@@ -19,7 +19,7 @@ public class ToolBlitz : MonoBehaviour
             img.color = hovercolor;
         }
 
-        if (Input.GetKeyUp(KeyCode.Alpha3))
+        if (Input.GetKeyUp(KeyCode.Alpha3) || Raumkapsel.VR.Tools.GetToolPressed(Raumkapsel.VR.Tool.Blitz))
         {
             Image img = GetComponent<Image>();
             img.color = Color.white;
