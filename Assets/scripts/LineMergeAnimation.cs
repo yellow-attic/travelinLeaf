@@ -2,47 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
+using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 
 public class LineMergeAnimation : MonoBehaviour
 {
-    [SerializeField] private LineRenderer lineA;      // 左边线
-    [SerializeField] private LineRenderer lineB;      // 右边线
-    [SerializeField] private LineRenderer mergedLine; // 最终合成的一条线
-
-    [SerializeField] private float mergeDurationInner = 1.5f; // 动画时长
-    [SerializeField] private float mergeDurationOuter = 1.5f; // 动画时长
+    [SerializeField, FormerlySerializedAs("lineA")] private LineRenderer _lineA;      // 左边线
+    [SerializeField, FormerlySerializedAs("lineB")] private LineRenderer _lineB;      // 右边线
+    [SerializeField, FormerlySerializedAs("mergedLine")] private LineRenderer _mergedLine; // 最终合成的一条线
+    [SerializeField] private Renderer[] materialsToAnimate;
 
     private bool isMerging = false;
 
     [Header("Glow Settings")]
-    [SerializeField] private Color finallineColor;
+    [SerializeField, FormerlySerializedAs("finallineColor")] private Color _finalLineColor;
+    [SerializeField, FormerlySerializedAs("finalmoleColor")] private Color _finalMoleColor;
 
-    Material matA;
-    Material matB;
-    Color originalColor;
-
-    [SerializeField] private Renderer[] materialsToAnimate;
-    [SerializeField] private float colorTransitionDuration = 1f;
-    [SerializeField] private Color finalmoleColor;
-
-
-    void Awake()
-    {
+    void Start() {
         // start disabled
-        mergedLine.gameObject.SetActive(false);
+        _mergedLine.gameObject.SetActive(false);
 
         // start broken parts enabled
-        lineA.gameObject.SetActive(true);
-        lineB.gameObject.SetActive(true);
-
-        matA = lineA.material;
-        matB = lineB.material;
-
-        originalColor = matA.color;   // 假设 A/B 是同色的
-
-        matA = lineA.material;
-        matB = lineB.material;
+        _lineA.gameObject.SetActive(true);
+        _lineB.gameObject.SetActive(true);
     }
 
     [ContextMenu("Test Merge Animation")]
@@ -51,19 +35,31 @@ public class LineMergeAnimation : MonoBehaviour
             StartCoroutine(_doMergeAnimation());
     }
 
+    [ContextMenu("Set Particle Orientation")]
+    private void setMergedParticleOrientation() {
+        Vector3 target = (_lineA.GetPosition(0) + _lineB.GetPosition(1)) * 0.5f;
+
+        ParticleSystem ps = _mergedLine.GetComponentInChildren<ParticleSystem>();
+        ps.gameObject.transform.position = target;
+
+        //var shape = ps.shape;
+        //Vector3 direction = (_lineA.GetPosition(0) - _lineB.GetPosition(1)).normalized;
+        //shape.rotation = Quaternion.LookRotation(direction, Vector3.down).eulerAngles;
+    }
+
     private IEnumerator _doMergeAnimation() {
         isMerging = true;
         // smoothly interpolate line ends towards center point
 
         // first find center, 0.5 way between lineA start and lineB start
-        Vector3 target = (lineA.GetPosition(0) + lineB.GetPosition(1)) * 0.5f;
-        Vector3 lineAFrom = lineA.GetPosition(1);
-        Vector3 lineBFrom = lineB.GetPosition(0);
+        Vector3 target = (_lineA.GetPosition(0) + _lineB.GetPosition(1)) * 0.5f;
+        Vector3 lineAFrom = _lineA.GetPosition(1);
+        Vector3 lineBFrom = _lineB.GetPosition(0);
 
         float time = 0.0f;
         const float Duration = 1.3f;
 
-        Color start = lineA.material.color;
+        Color start = _lineA.material.color;
 
         while (time <= Duration) {
             time += Time.deltaTime;
@@ -71,190 +67,48 @@ public class LineMergeAnimation : MonoBehaviour
 
             // apply back easing for nicer animation
             // https://easings.net/#easeInBack
-            lineA.SetPosition(1, Vector3.LerpUnclamped(lineAFrom, target, Raumkapsel.Ease.BackIn(nrm)));
-            lineB.SetPosition(0, Vector3.LerpUnclamped(lineBFrom, target, Raumkapsel.Ease.BackIn(nrm)));
+            _lineA.SetPosition(1, Vector3.LerpUnclamped(lineAFrom, target, Raumkapsel.Ease.BackIn(nrm)));
+            _lineB.SetPosition(0, Vector3.LerpUnclamped(lineBFrom, target, Raumkapsel.Ease.BackIn(nrm)));
 
             // also animate color of line materials
-            lineA.material.color = Color.Lerp(start, finallineColor, nrm);
-            lineB.material.color = Color.Lerp(start, finallineColor, nrm);
+            _lineA.material.color = Color.Lerp(start, _finalLineColor, nrm);
+            _lineB.material.color = Color.Lerp(start, _finalLineColor, nrm);
 
             yield return new WaitForEndOfFrame();
         }
 
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.033f);
 
         // complete connect by diabling separate lines and enabling merged line
-        Debug.Assert(mergedLine != null);
+        Debug.Assert(_mergedLine != null);
 
-        mergedLine.gameObject.SetActive(true);
+        // this also enables the merged line particles, set the edge orientation correctly
+        _mergedLine.gameObject.SetActive(true);
 
-        lineA.gameObject.SetActive(false);
-        lineB.gameObject.SetActive(false);
-    }
+        // set the particle position to match line center
+        setMergedParticleOrientation();
 
+        _lineA.gameObject.SetActive(false);
+        _lineB.gameObject.SetActive(false);
 
-    private System.Collections.IEnumerator MergeLinesCoroutine()
-    {
-        isMerging = true;
-
-        // 假设每条线都是 2 个点：0 = 外侧, 1 = 靠中间
-        if (lineA.positionCount < 2 || lineB.positionCount < 2)
-        {
-            Debug.LogWarning("LineA / LineB 至少需要 2 个点");
-            yield break;
-        }
-
-        // 记录初始点位置
-        Vector3 aOuter = lineA.GetPosition(0);
-        Vector3 aInnerStart = lineA.GetPosition(1);
-
-        Vector3 bInnerStart = lineB.GetPosition(0);
-        Vector3 bOuter = lineB.GetPosition(1);
-
-        float elapsedTotal = 0f;
-        float totalDuration = mergeDurationInner + mergeDurationOuter;
-
-
-        // -------- 阶段 1：内侧点靠拢 --------
-        Vector3 meetPointInner = (aInnerStart + bInnerStart) * 0.5f;
-
-        float t = 0f;
-        while (t < 1f)
-        {
-            t += Time.deltaTime / mergeDurationInner;
-            float k = Mathf.SmoothStep(0, 1, t);
-
-            // A 的内侧点 → 内侧中点
-            lineA.SetPosition(1, Vector3.Lerp(aInnerStart, meetPointInner, k));
-
-            // B 的内侧点 → 内侧中点
-            lineB.SetPosition(0, Vector3.Lerp(bInnerStart, meetPointInner, k));
-
-            // 发光动画更新
-            elapsedTotal += Time.deltaTime;
-            UpdateGlow(elapsedTotal, totalDuration);
-
-            yield return null;
-        }
-
-        // -------- 阶段 2：外侧点靠拢 --------
-        Vector3 aInnerNow = lineA.GetPosition(1);
-        Vector3 bInnerNow = lineB.GetPosition(0);
-
-        Vector3 meetPointOuter = (aOuter + bOuter) * 0.5f;
-
-        t = 0f;
-        while (t < 1f)
-        {
-            t += Time.deltaTime / mergeDurationOuter;
-            float k = Mathf.SmoothStep(0, 1, t);
-
-            // A 的外侧点 → 外侧中点
-            lineA.SetPosition(1, Vector3.Lerp(aInnerNow, meetPointOuter, k));
-
-            // B 的外侧点 → 外侧中点
-            lineB.SetPosition(0, Vector3.Lerp(bInnerNow, meetPointOuter, k));
-
-            // 发光动画更新（整段合并过程都在更新）
-            elapsedTotal += Time.deltaTime;
-            UpdateGlow(elapsedTotal, totalDuration);
-
-            yield return null;
-        }
-
-        // ------- 合成最终的一条线 -------
-        if (mergedLine != null)
-        {
-            mergedLine.gameObject.SetActive(true);
-
-            lineA.gameObject.SetActive(false);
-            lineB.gameObject.SetActive(false);
-        }
-
-        //collider & particle aus
-        //alle material green
-        //alle line green
-        StartCoroutine(FinalColorTransition());
-
-        isMerging = false;
-    }
-
-
-    void UpdateGlow(float elapsed, float totalDuration)
-    {
-        float t = Mathf.Clamp01(elapsed / totalDuration);
-
-        // 前半段：原色 → 白色
-        Color targetColor;
-        if (t < 0.5f)
-        {
-            float k = t / 0.5f;
-            targetColor = Color.Lerp(originalColor, Color.white, k);
-        }
-        // 后半段：白色 → finalColor
-        else
-        {
-            float k = (t - 0.5f) / 0.5f;
-            targetColor = Color.Lerp(Color.white, finallineColor, k);
-        }
-
-        // 更新两条线的颜色
-        lineA.startColor = targetColor;
-        lineA.endColor = targetColor;
-
-        lineB.startColor = targetColor;
-        lineB.endColor = targetColor;
-
-        // 更新材质颜色（若 LineRenderer 使用 sharedMaterial）
-        matA.color = targetColor;
-        matB.color = targetColor;
-    }
-
-    void SetFinalNonGlowState()
-    {
-        matA.color = finallineColor;
-        matB.color = finallineColor;
-    }
-
-    IEnumerator FinalColorTransition()
-    {
-        float t = 0f;
-
-        // 记录所有材质的原始颜色
+        // now interpolate remaining molecule parts to final color
         Color[] originalColors = new Color[materialsToAnimate.Length];
-        for (int i = 0; i < materialsToAnimate.Length; i++)
-        {
+        for (int i = 0; i < materialsToAnimate.Length; i++) {
             originalColors[i] = materialsToAnimate[i].material.color;
         }
 
-        // ---------- 阶段 1：原色 → 白色 ----------
-        while (t < 1f)
-        {
-            t += Time.deltaTime / (colorTransitionDuration * 0.5f);
-            float k = Mathf.SmoothStep(0, 1, t);
+        time = 0.0f;
+        const float MoleculeColorDuration = 2.5f;
+        while (time <= MoleculeColorDuration) {
+            time += Time.deltaTime;
+            float nrm = Mathf.Clamp01(time / MoleculeColorDuration);
 
-            for (int i = 0; i < materialsToAnimate.Length; i++)
-            {
-                materialsToAnimate[i].material.color = Color.Lerp(originalColors[i], Color.white, k);
+            for (int i = 0; i < materialsToAnimate.Length; i++) {
+                materialsToAnimate[i].material.color = Color.Lerp(originalColors[i], _finalMoleColor, Raumkapsel.Ease.CubicInOut(nrm));
             }
 
-            yield return null;
-        }
-
-        // ---------- 阶段 2：白色 → finalColor ----------
-        t = 0f;
-        while (t < 1f)
-        {
-            t += Time.deltaTime / (colorTransitionDuration * 0.5f);
-            float k = Mathf.SmoothStep(0, 1, t);
-
-            for (int i = 0; i < materialsToAnimate.Length; i++)
-            {
-                materialsToAnimate[i].material.color = Color.Lerp(Color.white, finalmoleColor, k);
-            }
-
-            yield return null;
+            yield return new WaitForEndOfFrame();
         }
     }
 }

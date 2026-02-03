@@ -47216,7 +47216,7 @@ Transform:
   m_GameObject: {fileID: 353924500}
   serializedVersion: 2
   m_LocalRotation: {x: -0.33102322, y: -0.24314627, z: -0.08869738, w: 0.907434}
-  m_LocalPosition: {x: 22.97, y: -16.58, z: 51.43}
+  m_LocalPosition: {x: 22.894247, y: -16.449823, z: 51.785423}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -47369,7 +47369,7 @@ ParticleSystem:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-  moveWithTransform: 0
+  moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
   randomSeed: 0
@@ -47432,7 +47432,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 4
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -47927,15 +47927,15 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 0
+    type: 5
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 0.3
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
-    m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 1, y: 1, z: 1}
+    m_Rotation: {x: 8.650213, y: 81.06769, z: 0.00000043179858}
+    m_Scale: {x: 1, y: 1, z: 10}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -48014,7 +48014,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 1
+      value: 0.46
       mode: 0
       spread: 0
       speed:
@@ -180230,12 +180230,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab97d5fe4be694a8bb4748ba5f23f3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineA: {fileID: 1546723156}
-  lineB: {fileID: 964313864}
-  mergedLine: {fileID: 262186810}
-  mergeDurationInner: 1.5
-  mergeDurationOuter: 1.5
-  finallineColor: {r: 0.7561758, g: 1, b: 0.48584902, a: 1}
+  _lineA: {fileID: 1546723156}
+  _lineB: {fileID: 964313864}
+  _mergedLine: {fileID: 262186810}
   materialsToAnimate:
   - {fileID: 1182707736}
   - {fileID: 1182707735}
@@ -180250,8 +180247,8 @@ MonoBehaviour:
   - {fileID: 1059676412}
   - {fileID: 1182707725}
   - {fileID: 1182707723}
-  colorTransitionDuration: 2
-  finalmoleColor: {r: 0.22169808, g: 1, b: 0.25848752, a: 1}
+  _finalLineColor: {r: 0.7561758, g: 1, b: 0.48584902, a: 1}
+  _finalMoleColor: {r: 0.22169808, g: 1, b: 0.25848752, a: 1}
 --- !u!1 &1349454728
 GameObject:
   m_ObjectHideFlags: 0
@@ -187085,12 +187082,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab97d5fe4be694a8bb4748ba5f23f3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineA: {fileID: 830220743}
-  lineB: {fileID: 1692407650}
-  mergedLine: {fileID: 1700152608}
-  mergeDurationInner: 1.5
-  mergeDurationOuter: 1.5
-  finallineColor: {r: 0.7561758, g: 1, b: 0.48584902, a: 1}
+  _lineA: {fileID: 830220743}
+  _lineB: {fileID: 1692407650}
+  _mergedLine: {fileID: 1700152608}
   materialsToAnimate:
   - {fileID: 1964142594}
   - {fileID: 617317889}
@@ -187105,8 +187099,8 @@ MonoBehaviour:
   - {fileID: 169158154}
   - {fileID: 344802221}
   - {fileID: 133262485}
-  colorTransitionDuration: 2
-  finalmoleColor: {r: 0.22169808, g: 1, b: 0.25848752, a: 1}
+  _finalLineColor: {r: 0.7561758, g: 1, b: 0.48584902, a: 1}
+  _finalMoleColor: {r: 0.22169808, g: 1, b: 0.25848752, a: 1}
 --- !u!114 &1456261369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -208976,12 +208970,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab97d5fe4be694a8bb4748ba5f23f3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineA: {fileID: 534196502}
-  lineB: {fileID: 1140675534}
-  mergedLine: {fileID: 1344618785}
-  mergeDurationInner: 1.5
-  mergeDurationOuter: 1.5
-  finallineColor: {r: 0.7561758, g: 1, b: 0.48584902, a: 1}
+  _lineA: {fileID: 534196502}
+  _lineB: {fileID: 1140675534}
+  _mergedLine: {fileID: 1344618785}
   materialsToAnimate:
   - {fileID: 1182707736}
   - {fileID: 1182707735}
@@ -208996,8 +208987,8 @@ MonoBehaviour:
   - {fileID: 1059676412}
   - {fileID: 1182707725}
   - {fileID: 1182707723}
-  colorTransitionDuration: 2
-  finalmoleColor: {r: 0.22169808, g: 1, b: 0.25848752, a: 1}
+  _finalLineColor: {r: 0.7561758, g: 1, b: 0.48584902, a: 1}
+  _finalMoleColor: {r: 0.22169808, g: 1, b: 0.25848752, a: 1}
 --- !u!1 &1579950006
 GameObject:
   m_ObjectHideFlags: 0
@@ -214747,12 +214738,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab97d5fe4be694a8bb4748ba5f23f3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineA: {fileID: 53064616}
-  lineB: {fileID: 199711485}
-  mergedLine: {fileID: 900749083}
-  mergeDurationInner: 1.5
-  mergeDurationOuter: 1.5
-  finallineColor: {r: 0.7561758, g: 1, b: 0.48584902, a: 1}
+  _lineA: {fileID: 53064616}
+  _lineB: {fileID: 199711485}
+  _mergedLine: {fileID: 900749083}
   materialsToAnimate:
   - {fileID: 1150274485}
   - {fileID: 85799338}
@@ -214767,8 +214755,8 @@ MonoBehaviour:
   - {fileID: 1183818354}
   - {fileID: 141921346}
   - {fileID: 2052282389}
-  colorTransitionDuration: 2
-  finalmoleColor: {r: 0.22169808, g: 1, b: 0.25848752, a: 1}
+  _finalLineColor: {r: 0.7561758, g: 1, b: 0.48584902, a: 1}
+  _finalMoleColor: {r: 0.22169808, g: 1, b: 0.25848752, a: 1}
 --- !u!4 &1685574211 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -109248263962275986, guid: 86d935893ca6f41b5827f5f1dce6b878, type: 3}
@@ -220073,12 +220061,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab97d5fe4be694a8bb4748ba5f23f3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineA: {fileID: 731868290}
-  lineB: {fileID: 1887892503}
-  mergedLine: {fileID: 2065008575}
-  mergeDurationInner: 1.5
-  mergeDurationOuter: 1.5
-  finallineColor: {r: 0.7561758, g: 1, b: 0.48584902, a: 1}
+  _lineA: {fileID: 731868290}
+  _lineB: {fileID: 1887892503}
+  _mergedLine: {fileID: 2065008575}
   materialsToAnimate:
   - {fileID: 1964142594}
   - {fileID: 617317889}
@@ -220093,8 +220078,8 @@ MonoBehaviour:
   - {fileID: 169158154}
   - {fileID: 344802221}
   - {fileID: 133262485}
-  colorTransitionDuration: 2
-  finalmoleColor: {r: 0.22169808, g: 1, b: 0.25848752, a: 1}
+  _finalLineColor: {r: 0.7561758, g: 1, b: 0.48584902, a: 1}
+  _finalMoleColor: {r: 0.22169808, g: 1, b: 0.25848752, a: 1}
 --- !u!1001 &1801071748
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -233718,12 +233703,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab97d5fe4be694a8bb4748ba5f23f3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineA: {fileID: 1305494832}
-  lineB: {fileID: 638034198}
-  mergedLine: {fileID: 184967103}
-  mergeDurationInner: 1.5
-  mergeDurationOuter: 1.5
-  finallineColor: {r: 0.7561758, g: 1, b: 0.48584902, a: 1}
+  _lineA: {fileID: 1305494832}
+  _lineB: {fileID: 638034198}
+  _mergedLine: {fileID: 184967103}
   materialsToAnimate:
   - {fileID: 1150274485}
   - {fileID: 85799338}
@@ -233738,8 +233720,8 @@ MonoBehaviour:
   - {fileID: 1183818354}
   - {fileID: 141921346}
   - {fileID: 2052282389}
-  colorTransitionDuration: 2
-  finalmoleColor: {r: 0.22169808, g: 1, b: 0.25848752, a: 1}
+  _finalLineColor: {r: 0.7561758, g: 1, b: 0.48584902, a: 1}
+  _finalMoleColor: {r: 0.22169808, g: 1, b: 0.25848752, a: 1}
 --- !u!4 &1893584723 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 463568677538290995, guid: 56c07e7ba7de64bea93725829ef1b566, type: 3}
