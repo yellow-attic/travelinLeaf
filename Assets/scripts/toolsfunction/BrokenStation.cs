@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BrokenStation : MonoBehaviour {
-
-    //[SerializeField] private Line _lineA;
-    //[SerializeField] private Line _lineB;
-    //[SerializeField] private Line _mergedLine;
+    public Line mergedLine;
+    public Line lineA;
+    public Line lineB;
 
     private LineMergeAnimation linemerge;
     private BatteryManager batterymanager;
@@ -16,32 +15,41 @@ public class BrokenStation : MonoBehaviour {
         batterymanager = FindAnyObjectByType<BatteryManager>();
         linemerge = GetComponent<LineMergeAnimation>();
         isconnected = false;
+
+        // TODO: remove when all prefabs updated
+        if (mergedLine == null) return;
+
+        // start disabled
+        mergedLine.gameObject.SetActive(false);
+
+        // start broken parts enabled
+        lineA.gameObject.SetActive(true);
+        lineB.gameObject.SetActive(true);
+    }
+
+    public void setRepairedConnection() {
+        mergedLine.gameObject.SetActive(true);
+        lineA.gameObject.SetActive(false);
+        lineB.gameObject.SetActive(false);
     }
 
     public bool isFixed() {
-        return linemerge.isMergingFinished();
+        return mergedLine.gameObject.activeSelf;
     }
 
     [ContextMenu("Random Break Point")]
     private void randomBreakPoint() {
-        Line brokenLineA = GetComponent<LineMergeAnimation>().getLineA().GetComponent<Line>();
-        Line brokenLineB = GetComponent<LineMergeAnimation>().getLineB().GetComponent<Line>();
-        Line mergedLine = GetComponent<LineMergeAnimation>().getMergedLine().GetComponent<Line>();
+        LineRenderer mergedLineRenderer = mergedLine.renderer();
 
-        LineRenderer mergedLineRenderer = GetComponent<LineMergeAnimation>().getMergedLine();
-
-        brokenLineA.start = mergedLine.start;
-        brokenLineB.start = mergedLine.end;
+        lineA.start = mergedLine.start;
+        lineB.start = mergedLine.end;
 
         // now set random mid points
         Vector3 breakPointA = Vector3.Lerp(mergedLine.start.position, mergedLine.end.position, 0.35f);
         Vector3 breakPointB = Vector3.Lerp(mergedLine.start.position, mergedLine.end.position, 0.65f);
 
-        brokenLineA.transform.GetChild(0).position = breakPointA;
-        brokenLineB.transform.GetChild(0).position = breakPointB;
-
-        brokenLineA.end = brokenLineA.transform.GetChild(0);
-        brokenLineB.end = brokenLineB.transform.GetChild(0);
+        lineA.end.position = breakPointA;
+        lineB.end.position = breakPointB;
     }
 
     public void BrokenRepair() {

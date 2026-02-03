@@ -14,4 +14,12 @@ public class Line : MonoBehaviour {
         if (end)
             GetComponent<LineRenderer>().SetPosition(1, end.position);
     }
+
+    public Vector3 center() {
+        return Vector3.Lerp(start.position, end.position, 0.5f);
+    }
+
+    public LineRenderer renderer() {
+        return GetComponent<LineRenderer>();
+    }
 }
