@@ -11,12 +11,9 @@ public class HandConnectManager : MonoBehaviour
     private bool connectallowed = false;
 
 
-    void Update()
-    {
-        if (leftcheck.handConnect && rightcheck.handConnect)
-        {
-            if(!connectallowed)
-            {
+    void Update()  {
+        if (leftcheck.handConnect && rightcheck.handConnect) {
+            if(!connectallowed) {
                 connectpanel.SetActive(true);
                 connectpanel.GetComponent<ConnectManager>().GetBrokenStation(leftcheck.BrokStat);
                 connectallowed = true;
@@ -25,8 +22,7 @@ public class HandConnectManager : MonoBehaviour
     }
 
 
-    public void ConnectpanelReset()
-    {
+    public void ConnectpanelReset() {
         connectallowed = false;
     }
 }

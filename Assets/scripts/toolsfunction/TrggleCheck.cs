@@ -13,6 +13,7 @@ public class TrggleCheck : MonoBehaviour
     public struct ConnectInfo {
         public bool isConnected;
         public LineRenderer brokenLine;
+        public BrokenStation brokenStation;
     }
 
     public ConnectInfo CheckConnect() {
@@ -21,10 +22,10 @@ public class TrggleCheck : MonoBehaviour
 
             Debug.Log("hand connenct");
             // TODO: get particle object which is end of the broken line
-            return new ConnectInfo { isConnected=true, brokenLine = _brokenCollider.GetComponentInParent<LineRenderer>() };
+            return new ConnectInfo { isConnected=true, brokenLine = _brokenCollider.GetComponentInParent<LineRenderer>(), brokenStation = _brokenCollider.GetComponentInParent<BrokenStation>() };
         }
 
-        return new ConnectInfo { isConnected = false, brokenLine = null };
+        return new ConnectInfo { isConnected = false, brokenLine = null, brokenStation = null };
     }
 
     private void OnTriggerEnter(Collider other)

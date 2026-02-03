@@ -15,6 +15,8 @@ public class LineMergeAnimation : MonoBehaviour
     [SerializeField] private Renderer[] materialsToAnimate;
 
     private bool isMerging = false;
+    private bool _mergeFinished= false;
+    public bool isMergingFinished() => _mergeFinished;
 
     [Header("Glow Settings")]
     [SerializeField, FormerlySerializedAs("finallineColor")] private Color _finalLineColor;
@@ -92,6 +94,8 @@ public class LineMergeAnimation : MonoBehaviour
         _lineA.gameObject.SetActive(false);
         _lineB.gameObject.SetActive(false);
 
+        _mergeFinished = true;
+
         // now interpolate remaining molecule parts to final color
         Color[] originalColors = new Color[materialsToAnimate.Length];
         for (int i = 0; i < materialsToAnimate.Length; i++) {
@@ -110,5 +114,7 @@ public class LineMergeAnimation : MonoBehaviour
 
             yield return new WaitForEndOfFrame();
         }
+
+        yield return new WaitForSeconds(2.5f);
     }
 }

@@ -18,8 +18,8 @@ public class BrokenStation : MonoBehaviour {
         isconnected = false;
     }
 
-    public LineMergeAnimation getLineMergeAnimation() {
-        return linemerge;
+    public bool isFixed() {
+        return linemerge.isMergingFinished();
     }
 
     public void BrokenRepair() {
