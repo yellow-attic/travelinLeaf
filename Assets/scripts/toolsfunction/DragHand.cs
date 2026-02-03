@@ -7,8 +7,15 @@ public class DragHand : MonoBehaviour {
         Connected,
     }
 
+    enum Hand {
+        Left = 0,
+        Right = 1,
+    }
+
     private State _state = State.Idle;
     private LineRenderer _connectedLine;
+
+    [SerializeField] private Hand _hand;
 
     [Header("Circle Settings")]
     [SerializeField] private Transform center; // arm root position
@@ -31,8 +38,8 @@ public class DragHand : MonoBehaviour {
 
     void Update() {
         if (!trigglecheck.handConnect) {
-            if (Input.GetMouseButtonDown(0)) _state = State.Dragging;
-            if (Input.GetMouseButtonUp(0)) {
+            if (Input.GetMouseButtonDown((int)_hand)) _state = State.Dragging;
+            if (Input.GetMouseButtonUp((int)_hand)) {
                 if (trigglecheck.CheckConnect().isConnected) {
                     handanim.SetTrigger("IsCatched");
                     _state = State.Connected;
