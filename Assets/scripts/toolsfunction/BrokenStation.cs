@@ -1,25 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BrokenStation : MonoBehaviour {
+    [Header("Broken Line Transforms")]
+    [SerializeField] private Transform _brokenStart;
+    [SerializeField] private Transform _brokenEnd;
+
     public Line mergedLine;
     public Line lineA;
     public Line lineB;
 
     private LineMergeAnimation linemerge;
     private BatteryManager batterymanager;
-    private bool isconnected;
+    private bool isconnected = false;
 
     private void Start() {
         batterymanager = FindAnyObjectByType<BatteryManager>();
         linemerge = GetComponent<LineMergeAnimation>();
-        isconnected = false;
 
         // TODO: remove when all prefabs updated
         if (mergedLine == null) return;
 
-        // start disabled
+        // properly sets start+end for broken lines
+        applyBrokenConnections();
+
+        // start merged line disabled
         mergedLine.gameObject.SetActive(false);
 
         // start broken parts enabled
@@ -38,7 +45,14 @@ public class BrokenStation : MonoBehaviour {
     }
 
     [ContextMenu("Random Break Point")]
-    private void randomBreakPoint() {
+    private void applyBrokenConnections() {
+        transform.position = Vector3.Lerp(_brokenStart.position, _brokenEnd.position, 0.5f);
+
+        // prepare merged line
+        mergedLine.start = _brokenStart;
+        mergedLine.end = _brokenEnd;
+        mergedLine.applyPositions();
+
         LineRenderer mergedLineRenderer = mergedLine.renderer();
 
         lineA.start = mergedLine.start;
@@ -50,9 +64,15 @@ public class BrokenStation : MonoBehaviour {
 
         lineA.end.position = breakPointA;
         lineB.end.position = breakPointB;
+
+        lineA.applyPositions();
+        lineB.applyPositions();
+
+        // set point light position
+        GetComponentInChildren<Light>().transform.position = mergedLine.center() + new Vector3(0.33f,0.1f,0.24f);
     }
 
-    public void BrokenRepair() {
+    public void startRepair() {
         if (isconnected) return;
 
         if (linemerge != null)

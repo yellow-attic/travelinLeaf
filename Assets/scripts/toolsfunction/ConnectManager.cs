@@ -29,7 +29,7 @@ public class ConnectManager : MonoBehaviour
             {
                 Debug.Log("Line Connect!");
 
-                currentstation.BrokenRepair();
+                currentstation.startRepair();
                 //connecttime.ConnectPanelClose();
             }
         }

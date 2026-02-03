@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 
 public class ShowInfro : DistanceCheck
@@ -12,9 +13,13 @@ public class ShowInfro : DistanceCheck
     private bool isenergyget;
 
 
-    private void Start()
-    {
-
+    private void Start() {
+        if (target == null) {
+            GameObject player = GameObject.FindWithTag("TagPlayer");
+            if (player != null) {
+                target = player.transform;
+            }
+        }
     }
 
     protected override void OnEnterRadius()

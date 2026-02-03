@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 
 public class ShowHinweis : DistanceCheck
@@ -15,6 +16,7 @@ public class ShowHinweis : DistanceCheck
 
     private void Start()
     {
+        
         isenergyget = false;
         batterymanager = FindAnyObjectByType<BatteryManager>();
     }
