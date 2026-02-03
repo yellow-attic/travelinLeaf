@@ -93,8 +93,7 @@ public class DragHand : MonoBehaviour {
     private void _grab() {
         Debug.Assert(_connectionInfo.brokenLine != null, "Connected LineRenderer is null in grab state.");
         Debug.Assert(_connectionInfo.brokenLine.positionCount == 2, "Connected LineRenderer does not have 2 positions.");
-        int pos = _hand == Hand.Left ? 1 : 0; // line positions are different for left/right hand - TODO: this probably fails when entering from back?
-        transform.position = _connectionInfo.brokenLine.GetPosition(pos);
+        transform.position = _connectionInfo.brokenLine.GetPosition(1);
     }
 
     private void OnDrawGizmosSelected() {

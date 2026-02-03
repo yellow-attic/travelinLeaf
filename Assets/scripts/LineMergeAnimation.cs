@@ -22,6 +22,11 @@ public class LineMergeAnimation : MonoBehaviour
     [SerializeField, FormerlySerializedAs("finallineColor")] private Color _finalLineColor;
     [SerializeField, FormerlySerializedAs("finalmoleColor")] private Color _finalMoleColor;
 
+
+    public LineRenderer getLineA() => _lineA;
+    public LineRenderer getLineB() => _lineB;
+    public LineRenderer getMergedLine() => _mergedLine;
+
     void Start() {
         // start disabled
         _mergedLine.gameObject.SetActive(false);
@@ -54,9 +59,9 @@ public class LineMergeAnimation : MonoBehaviour
         // smoothly interpolate line ends towards center point
 
         // first find center, 0.5 way between lineA start and lineB start
-        Vector3 target = (_lineA.GetPosition(0) + _lineB.GetPosition(1)) * 0.5f;
+        Vector3 target = (_lineA.GetPosition(1) + _lineB.GetPosition(1)) * 0.5f;
         Vector3 lineAFrom = _lineA.GetPosition(1);
-        Vector3 lineBFrom = _lineB.GetPosition(0);
+        Vector3 lineBFrom = _lineB.GetPosition(1);
 
         float time = 0.0f;
         const float Duration = 1.3f;
@@ -69,8 +74,10 @@ public class LineMergeAnimation : MonoBehaviour
 
             // apply back easing for nicer animation
             // https://easings.net/#easeInBack
-            _lineA.SetPosition(1, Vector3.LerpUnclamped(lineAFrom, target, Raumkapsel.Ease.BackIn(nrm)));
-            _lineB.SetPosition(0, Vector3.LerpUnclamped(lineBFrom, target, Raumkapsel.Ease.BackIn(nrm)));
+            _lineA.transform.GetChild(0).position = Vector3.LerpUnclamped(lineAFrom, target, Raumkapsel.Ease.BackIn(nrm));
+            _lineB.transform.GetChild(0).position = Vector3.LerpUnclamped(lineBFrom, target, Raumkapsel.Ease.BackIn(nrm));
+            _lineA.GetComponent<Line>().applyPositions();
+            _lineB.GetComponent<Line>().applyPositions();
 
             // also animate color of line materials
             _lineA.material.color = Color.Lerp(start, _finalLineColor, nrm);

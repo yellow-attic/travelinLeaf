@@ -3,16 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [ExecuteAlways]
-public class Line : MonoBehaviour
-{
+public class Line : MonoBehaviour {
 
     public Transform start;
     public Transform end;
 
-
-    // Update is called once per frame
-    void Update()
-    {
+    public void applyPositions() {
         if (start) 
            GetComponent<LineRenderer>().SetPosition(0, start.position);
         if (end)

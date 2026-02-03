@@ -47,6 +47,7 @@ public class MolConnections : MonoBehaviour {
             line.transform.position = Vector3.Lerp(connection.from.position, connection.to.position, 0.5f);
             line.start = connection.from;
             line.end = connection.to;
+            line.applyPositions();
         }
     }
 }
