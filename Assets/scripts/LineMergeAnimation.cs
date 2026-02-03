@@ -13,6 +13,8 @@ public class LineMergeAnimation : MonoBehaviour {
 
     private bool _isMerging = false;
 
+    [SerializeField, FormerlySerializedAs("curve")] private AnimationCurve _connectAnimationCurve;
+
     [Header("Color Settings")]
     [SerializeField, FormerlySerializedAs("finallineColor")] private Color _finalLineColor;
     [SerializeField, FormerlySerializedAs("finalmoleColor")] private Color _finalMoleColor;
@@ -34,7 +36,7 @@ public class LineMergeAnimation : MonoBehaviour {
         Vector3 lineBFrom = brokenStation.lineB.end.position;
 
         float time = 0.0f;
-        const float Duration = 1.3f;
+        const float Duration = 1.9f;
 
         Color start = brokenStation.lineA.renderer().material.color;
 
@@ -43,8 +45,9 @@ public class LineMergeAnimation : MonoBehaviour {
             float nrm = Mathf.Clamp01(time / Duration);
 
             // apply back easing for nicer animation
-            brokenStation.lineA.end.position = Vector3.LerpUnclamped(lineAFrom, target, Raumkapsel.Ease.BackIn(nrm));
-            brokenStation.lineB.end.position = Vector3.LerpUnclamped(lineBFrom, target, Raumkapsel.Ease.BackIn(nrm));
+            float easedNrm = _connectAnimationCurve.Evaluate(nrm); // Raumkapsel.Ease.BackIn(nrm);
+            brokenStation.lineA.end.position = Vector3.LerpUnclamped(lineAFrom, target, easedNrm);
+            brokenStation.lineB.end.position = Vector3.LerpUnclamped(lineBFrom, target, easedNrm);
 
             brokenStation.lineA.GetComponent<Line>().applyPositions();
             brokenStation.lineB.GetComponent<Line>().applyPositions();

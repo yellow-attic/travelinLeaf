@@ -15,10 +15,8 @@ public class ShowInfro : DistanceCheck
 
     private void Start() {
         if (target == null) {
-            GameObject player = GameObject.FindWithTag("TagPlayer");
-            if (player != null) {
-                target = player.transform;
-            }
+            target = PlayerMovement.GetPlayer();
+            Debug.Log( name + " Set player as target.");
         }
     }
 

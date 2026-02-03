@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class PlayerMovement : MonoBehaviour
-{
+public class PlayerMovement : MonoBehaviour {
     [SerializeField] private float rotationSpeed = 100f;
     [SerializeField] private float forwardSpeed = 5f;
     [SerializeField] private float miniSpeed = 1f;
@@ -25,9 +24,13 @@ public class PlayerMovement : MonoBehaviour
     private bool moveallowed = true;
 
 
+    private static PlayerMovement _player;
+
+    static public Transform GetPlayer() => _player.transform;
 
     private void Start()
     {
+        _player = this;
         batterymanager = FindAnyObjectByType<BatteryManager>();
     }
 

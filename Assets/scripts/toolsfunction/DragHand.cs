@@ -93,7 +93,12 @@ public class DragHand : MonoBehaviour {
     private void _grab() {
         Debug.Assert(_connectionInfo.brokenLine != null, "Connected LineRenderer is null in grab state.");
         Debug.Assert(_connectionInfo.brokenLine.positionCount == 2, "Connected LineRenderer does not have 2 positions.");
-        transform.position = _connectionInfo.brokenLine.GetPosition(1);
+
+        Vector3 target = _connectionInfo.brokenStation.mergedLine.center();
+        if (Vector3.Distance(transform.position, target) > 0.1f) {
+            transform.position = _connectionInfo.brokenLine.GetPosition(1);
+        }
+
     }
 
     private void OnDrawGizmosSelected() {
