@@ -8,7 +8,7 @@ public class DragHand : MonoBehaviour {
     }
 
     private State _state = State.Idle;
-    private Transform _connectedTransform;
+    private LineRenderer _connectedLine;
 
     [Header("Circle Settings")]
     [SerializeField] private Transform center; // arm root position
@@ -30,28 +30,29 @@ public class DragHand : MonoBehaviour {
     }
 
     void Update() {
-        // if already connected, do nothing
-        if (trigglecheck.handConnect)
-            return;
-
-        if (Input.GetMouseButtonDown(0)) _state = State.Dragging;
-        if (Input.GetMouseButtonUp(0)) {
-            if (trigglecheck.CheckConnect().isConnected) {
-                handanim.SetTrigger("IsCatched");
-                _state = State.Connected;
-                _connectedTransform = trigglecheck.CheckConnect().lineEnd;
-            }
-            else {
-                handanim.SetTrigger("IsGrapping");
-                _state = State.Idle;
+        if (!trigglecheck.handConnect) {
+            if (Input.GetMouseButtonDown(0)) _state = State.Dragging;
+            if (Input.GetMouseButtonUp(0)) {
+                if (trigglecheck.CheckConnect().isConnected) {
+                    handanim.SetTrigger("IsCatched");
+                    _state = State.Connected;
+                    _connectedLine = trigglecheck.CheckConnect().brokenLine;
+                }
+                else {
+                    handanim.SetTrigger("IsGrapping");
+                    _state = State.Idle;
+                }
             }
         }
 
-        if (_state == State.Dragging)
+        if (_state == State.Dragging) {
             _drag();
+        }
 
-        if (_state == State.Connected)
+        if (_state == State.Connected) {
+            Debug.Assert(trigglecheck.handConnect);
             _grab();
+        }
     }
 
     private void _drag() {
@@ -70,8 +71,9 @@ public class DragHand : MonoBehaviour {
     }
 
     private void _grab() {
-        Debug.Assert(_connectedTransform != null, "Connected transform is null in grab state.");
-        transform.position = _connectedTransform.position;
+        Debug.Assert(_connectedLine != null, "Connected LineRenderer is null in grab state.");
+        Debug.Assert(_connectedLine.positionCount == 2, "Connected LineRenderer does not have 2 positions.");
+        transform.position = _connectedLine.GetPosition(1);
     }
 
     private void OnDrawGizmosSelected() {

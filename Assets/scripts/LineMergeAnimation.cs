@@ -1,6 +1,7 @@
-using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
 
 
 public class LineMergeAnimation : MonoBehaviour
@@ -28,6 +29,13 @@ public class LineMergeAnimation : MonoBehaviour
 
     void Awake()
     {
+        // start disabled
+        mergedLine.gameObject.SetActive(false);
+
+        // start broken parts enabled
+        lineA.gameObject.SetActive(true);
+        lineB.gameObject.SetActive(true);
+
         matA = lineA.material;
         matB = lineB.material;
 
@@ -37,20 +45,54 @@ public class LineMergeAnimation : MonoBehaviour
         matB = lineB.material;
     }
 
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            StartMerge();
-        }
-    }
-
-    public void StartMerge()
-    {
+    [ContextMenu("Test Merge Animation")]
+    public void play() {
         if (!isMerging)
-            StartCoroutine(MergeLinesCoroutine());
+            StartCoroutine(_doMergeAnimation());
     }
+
+    private IEnumerator _doMergeAnimation() {
+        isMerging = true;
+        // smoothly interpolate line ends towards center point
+
+        // first find center, 0.5 way between lineA start and lineB start
+        Vector3 target = (lineA.GetPosition(0) + lineB.GetPosition(1)) * 0.5f;
+        Vector3 lineAFrom = lineA.GetPosition(1);
+        Vector3 lineBFrom = lineB.GetPosition(0);
+
+        float time = 0.0f;
+        const float Duration = 1.3f;
+
+        Color start = lineA.material.color;
+
+        while (time <= Duration) {
+            time += Time.deltaTime;
+            float nrm = Mathf.Clamp01(time / Duration);
+
+            // apply back easing for nicer animation
+            // https://easings.net/#easeInBack
+            lineA.SetPosition(1, Vector3.LerpUnclamped(lineAFrom, target, Raumkapsel.Ease.BackIn(nrm)));
+            lineB.SetPosition(0, Vector3.LerpUnclamped(lineBFrom, target, Raumkapsel.Ease.BackIn(nrm)));
+
+            // also animate color of line materials
+            lineA.material.color = Color.Lerp(start, finallineColor, nrm);
+            lineB.material.color = Color.Lerp(start, finallineColor, nrm);
+
+            yield return new WaitForEndOfFrame();
+        }
+
+
+        yield return new WaitForSeconds(0.1f);
+
+        // complete connect by diabling separate lines and enabling merged line
+        Debug.Assert(mergedLine != null);
+
+        mergedLine.gameObject.SetActive(true);
+
+        lineA.gameObject.SetActive(false);
+        lineB.gameObject.SetActive(false);
+    }
+
 
     private System.Collections.IEnumerator MergeLinesCoroutine()
     {

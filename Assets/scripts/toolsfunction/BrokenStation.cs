@@ -18,11 +18,15 @@ public class BrokenStation : MonoBehaviour {
         isconnected = false;
     }
 
+    public LineMergeAnimation getLineMergeAnimation() {
+        return linemerge;
+    }
+
     public void BrokenRepair() {
         if (isconnected) return;
 
         if (linemerge != null)
-            linemerge.StartMerge();
+            linemerge.play();
 
         if (brokens != null)
         {
