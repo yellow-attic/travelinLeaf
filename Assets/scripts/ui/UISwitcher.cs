@@ -15,7 +15,7 @@ public class ToolSwitcher : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        if (InputControls.ToggleInfoPanel())
         {
             if (hinweispanel.activeSelf || brokenpanel.activeSelf)
                 return;

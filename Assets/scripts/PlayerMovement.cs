@@ -48,8 +48,8 @@ public class PlayerMovement : MonoBehaviour {
     {
         if (!moveallowed) return;
 
-        float horizontal = Input.GetAxis("Horizontal");  // A / D
-        float vertical = Input.GetAxis("Vertical");    // W / S
+        float horizontal = InputControls.NavigateHorizontal(); // A / D
+        float vertical = InputControls.NavigateVertical();    // W / S
 
         // --- 左右旋转（Yaw） ---
         transform.Rotate(Vector3.up, horizontal * rotationSpeed * Time.deltaTime);
@@ -81,37 +81,27 @@ public class PlayerMovement : MonoBehaviour {
         transform.localRotation = Quaternion.Euler(newX, transform.localEulerAngles.y, 0f);
 
         // --- 按 Space 键向前移动 ---
-        if (Input.GetKey(KeyCode.Space))
-        {
+        if (InputControls.Move() > 0.01f) {
             Vector3 direction;
 
-            if(Input.GetKey(KeyCode.LeftShift))
-            {
+            if (InputControls.InvertMove()) {
                 direction = Vector3.back;
-                if(backwardicon != null)
-                {
-                    backwardicon.SetActive(true);
-                }
+                if(backwardicon != null)                
+                    backwardicon.SetActive(true); 
             }
-            else
-            {
+            else {
                 direction = Vector3.forward;
-            }
-
-            if (Input.GetKeyUp(KeyCode.LeftShift))
-            {
                 if (backwardicon != null)
-                {
                     backwardicon.SetActive(false);
-                }
             }
 
-            if(batterymanager.IsLowBattery())
-            {
+            // respect (trigger-axis defined) input speed
+            direction *= InputControls.Move();
+
+            if (batterymanager.IsLowBattery()) {
                 transform.Translate(direction * miniSpeed * Time.deltaTime, Space.Self);
             }
-            else
-            {
+            else {
                 transform.Translate(direction * forwardSpeed * Time.deltaTime, Space.Self);
             }
 

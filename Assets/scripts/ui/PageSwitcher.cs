@@ -18,13 +18,11 @@ public class PageSwitcher : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(leftKey))
-        {
+        if (InputControls.ToolCycleBackward()) {
             PreviousPage();
         }
 
-        if (Input.GetKeyDown(rightKey))
-        {
+        if (InputControls.ToolCycleForward()) {
             NextPage();
         }
     }

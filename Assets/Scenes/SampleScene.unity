@@ -43591,6 +43591,7 @@ GameObject:
   - component: {fileID: 438807435}
   - component: {fileID: 438807434}
   - component: {fileID: 438807432}
+  - component: {fileID: 438807436}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -43794,6 +43795,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &438807436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 438807429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef4897346ffffe343951809097c57d9c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &439560398
 GameObject:
   m_ObjectHideFlags: 0
@@ -138576,6 +138589,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _brokenStart: {fileID: 0}
   _brokenEnd: {fileID: 0}
+  _lights: {fileID: 0}
   mergedLine: {fileID: 0}
   lineA: {fileID: 0}
   lineB: {fileID: 0}
@@ -161300,6 +161314,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _brokenStart: {fileID: 0}
   _brokenEnd: {fileID: 0}
+  _lights: {fileID: 0}
   mergedLine: {fileID: 0}
   lineA: {fileID: 0}
   lineB: {fileID: 0}
@@ -166304,6 +166319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _brokenStart: {fileID: 0}
   _brokenEnd: {fileID: 0}
+  _lights: {fileID: 0}
   mergedLine: {fileID: 0}
   lineA: {fileID: 0}
   lineB: {fileID: 0}
@@ -178746,6 +178762,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _brokenStart: {fileID: 0}
   _brokenEnd: {fileID: 0}
+  _lights: {fileID: 0}
   mergedLine: {fileID: 0}
   lineA: {fileID: 0}
   lineB: {fileID: 0}

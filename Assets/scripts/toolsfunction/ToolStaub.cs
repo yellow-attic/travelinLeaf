@@ -19,7 +19,7 @@ public class ToolStaub : MonoBehaviour
             img.color = hovercolor;
         }
 
-        if (Input.GetKeyUp(KeyCode.Alpha2))
+        if (Leave.Tools.GetToolPressed(Leave.Tool.Staub))
         {
             Image img = GetComponent<Image>();
             img.color = Color.white;

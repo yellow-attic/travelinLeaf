@@ -25,24 +25,11 @@ public class CameraFollow : MonoBehaviour
     public float maxDistance = 34f;
 
 
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            ToggleFocusMode();
-        }
-    }
-
     void LateUpdate()
     {
         if (target == null) return;
 
-        // --- Q/E 控制相机左右旋转（普通模式 + 聚焦模式通用）---
-        if (Input.GetKey(KeyCode.Q))
-            currentAngle -= rotateSpeed * Time.deltaTime;
-        if (Input.GetKey(KeyCode.E))
-            currentAngle += rotateSpeed * Time.deltaTime;
+        currentAngle += InputControls.ViewRotation() * rotateSpeed * Time.deltaTime;
 
         // 只绕 Y 轴旋转
         Quaternion rotation = Quaternion.Euler(0, currentAngle, 0);
@@ -60,7 +47,7 @@ public class CameraFollow : MonoBehaviour
             transform.LookAt(target.position + Vector3.up * height * 0.5f);
 
             // --- 鼠标滚轮控制相机距离 ---
-            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            float scroll = InputControls.ZoomView();
             if (Mathf.Abs(scroll) > 0.01f)
             {
                 distance -= scroll * zoomSpeed;

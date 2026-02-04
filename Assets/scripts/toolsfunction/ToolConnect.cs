@@ -28,7 +28,7 @@ public class ToolConnect : MonoBehaviour
             img.color = hovercolor;
         }
 
-        if (Input.GetKeyUp(KeyCode.Alpha4))
+        if (Leave.Tools.GetToolPressed(Leave.Tool.Arms))
         {
             Image img = GetComponent<Image>();
             img.color = Color.white;

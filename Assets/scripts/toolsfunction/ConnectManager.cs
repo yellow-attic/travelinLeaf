@@ -16,10 +16,8 @@ public class ConnectManager : MonoBehaviour
         connecttime = GetComponent<ConnetTime>();
     }
 
-    void Update()
-    {
-        if(Input.GetKey(KeyCode.C))
-        {
+    void Update() {
+        if(InputControls.GetConnectAction()) {
             if (!connecttime.isintime) return;
 
             float angleA = line1.currentangle;
