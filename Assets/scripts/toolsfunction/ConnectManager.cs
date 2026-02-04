@@ -25,9 +25,7 @@ public class ConnectManager : MonoBehaviour
             float angleA = line1.currentangle;
             float angleB = line2.currentangle;
 
-            if(Mathf.Abs(angleA) < connectangle && Mathf.Abs(angleB) < connectangle)
-            {
-                Debug.Log("Line Connect!");
+            if(Mathf.Abs(angleA) < connectangle && Mathf.Abs(angleB) < connectangle) {
 
                 currentstation.startRepair();
                 //connecttime.ConnectPanelClose();

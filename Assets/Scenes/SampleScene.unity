@@ -22597,6 +22597,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: leave_spaceship_rigg_fdi
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7d6e226f4d6fe43f0899f691e7d2f5ef, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 2044678882070976343, guid: 7d6e226f4d6fe43f0899f691e7d2f5ef, type: 3}

@@ -20,8 +20,6 @@ public class TrggleCheck : MonoBehaviour
         if (isColliding)  {
             handConnect = true;
 
-            Debug.Log("hand connenct");
-            // TODO: get particle object which is end of the broken line
             return new ConnectInfo { isConnected=true, brokenLine = _brokenCollider.GetComponentInParent<LineRenderer>(), brokenStation = _brokenCollider.GetComponentInParent<BrokenStation>() };
         }
 

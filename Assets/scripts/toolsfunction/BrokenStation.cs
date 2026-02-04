@@ -7,6 +7,7 @@ public class BrokenStation : MonoBehaviour {
     [Header("Broken Line Transforms")]
     [SerializeField] private Transform _brokenStart;
     [SerializeField] private Transform _brokenEnd;
+    [SerializeField] private Transform _lights;
 
     public Line mergedLine;
     public Line lineA;
@@ -69,7 +70,7 @@ public class BrokenStation : MonoBehaviour {
         lineB.applyPositions();
 
         // set point light position
-        GetComponentInChildren<Light>().transform.position = mergedLine.center() + new Vector3(0.33f,0.1f,0.24f);
+        _lights.position = mergedLine.center() + Vector3.up;
     }
 
     public void startRepair() {

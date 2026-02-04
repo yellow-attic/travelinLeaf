@@ -730,6 +730,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: spacefly
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 564fbd88394c14033ae07a1c92736714, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1053612493454666555, guid: 564fbd88394c14033ae07a1c92736714, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 0
@@ -1823,7 +1827,7 @@ ParticleSystem:
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
   looping: 1
-  prewarm: 0
+  prewarm: 1
   playOnAwake: 1
   useUnscaledTime: 0
   autoRandomSeed: 1
@@ -35067,7 +35071,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1156042184
 Transform:
   m_ObjectHideFlags: 0
@@ -35574,7 +35578,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 0.8349056, g: 0.9710394, b: 1, a: 1}
-  m_Intensity: 1.7
+  m_Intensity: 3
   m_Range: 6.28
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -36357,9 +36361,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -775425269818397446, guid: 6af0a3b00bc9d4eb39c91cf8caf98e5d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.24
+      objectReference: {fileID: 0}
+    - target: {fileID: -775425269818397446, guid: 6af0a3b00bc9d4eb39c91cf8caf98e5d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.37
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6af0a3b00bc9d4eb39c91cf8caf98e5d, type: 3}
       propertyPath: m_Name
       value: tree
+      objectReference: {fileID: 0}
+    - target: {fileID: 6999523424138782673, guid: 6af0a3b00bc9d4eb39c91cf8caf98e5d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -46696,11 +46712,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 639f312be4e6941c98fd53359cd5114c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hand: 0
   center: {fileID: 1057528923}
   radius: 1
   trigglecheck: {fileID: 600609129}
   handanim: {fileID: 871388608}
-  startpos: {x: -1.4210005, y: 0.453, z: 0.00999999}
+  _resetPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1783041219
 GameObject:
   m_ObjectHideFlags: 0
